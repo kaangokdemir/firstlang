@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+        href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" media="all">
+</head>
+
+<body>
+    <div id="app">
+        <section class="hero is-warning is-bold">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        {{texts.title}}
+                    </h1>
+                </div>
+            </div>
+        </section>
+        <!--NAVBAR ENDS-->
+
+
+
+
+
+        <section v-if="entered" class="section">
+
+            <div class="container">
+                <div class="justified">
+                    <h2 v-html="texts.welcome"></h2>
+                </div>
+
+                <hr>
+
+                <div class="justified">
+                    <button @click="letsStart" class="button is-medium is-warning is-fullwidth">
+                        {{texts.letsRoll}}
+                    </button></div>
+            </div>
+
+        </section>
+
+        <section v-if="started" class="section">
+            <div class="container justified">
+                <p v-html="myQuestion"></p>
+            </div>
+            <hr>
+            <div class="buttons">
+                <b-button @click="pr01()" v-if="situation=='q01'" type="is-info is-fullwidth" outlined>{{answer.a0101}}
+                </b-button>
+                <b-button @click="pr02()" v-if="situation=='q01'" type="is-info is-fullwidth" outlined>{{answer.a0102}}
+                </b-button>
+                <b-button @click="pr11()" v-if="situation=='q01'" type="is-info is-fullwidth" outlined>{{answer.a0103}}
+                </b-button>
+                <b-button @click="pr11()" v-if="situation=='q01'" type="is-info is-fullwidth" outlined>{{answer.a0104}}
+                </b-button>
+                <b-button @click="pr11()" v-if="situation=='q01'" type="is-info is-fullwidth" outlined>{{answer.a0105}}
+                </b-button>
+                <b-button @click="rr01()" v-if="situation=='q01'" type="is-info is-fullwidth" outlined>{{answer.a0106}}
+                </b-button>
+                <b-button @click="rr01()" v-if="situation=='q02'" type="is-info is-fullwidth" outlined>{{answer.a0201}}
+                </b-button>
+                <b-button @click="pr03()" v-if="situation=='q03'" type="is-info is-fullwidth" outlined>{{answer.a0301}}
+                </b-button>
+                <b-button @click="pr12()" v-if="situation=='q03'" type="is-info is-fullwidth" outlined>{{answer.a0302}}
+                </b-button>
+                <b-button @click="pr04()" v-if="situation=='q04'" type="is-info is-fullwidth" outlined>{{answer.a0401}}
+                </b-button>
+                <b-button @click="rr02()" v-if="situation=='q04'" type="is-info is-fullwidth" outlined>{{answer.a0402}}
+                </b-button>
+                <b-button @click="pr05()" v-if="situation=='q04'" type="is-info is-fullwidth" outlined>{{answer.a0403}}
+                </b-button>
+                <b-button @click="pr07()" v-if="situation=='q04'" type="is-info is-fullwidth" outlined>{{answer.a0404}}
+                </b-button>
+                <b-button @click="pr10()" v-if="situation=='q04'" type="is-info is-fullwidth" outlined>{{answer.a0405}}
+                </b-button>
+                <b-button @click="rr06()" v-if="situation=='q04'" type="is-info is-fullwidth" outlined>{{answer.a0406}}
+                </b-button>
+                <b-button @click="rr01()" v-if="situation=='q05'" type="is-info is-fullwidth" outlined><i
+                        class="fab fa-facebook-f"></i> {{answer.a0501}}
+                </b-button>
+                <b-button @click="rr01()" v-if="situation=='q05'" type="is-info is-fullwidth" outlined><i
+                        class="fab fa-google" style="color: #ff6b6b;"></i> {{answer.a0502}}
+                </b-button>
+                <b-button @click="rr09()" v-if="situation=='q05'" type="is-info is-fullwidth" outlined><i
+                        class="fab fa-apple" style="color: #c0b9b9;"></i> {{answer.a0503}}
+                </b-button>
+                <b-button @click="rr06()" v-if="situation=='q05'" type="is-info is-fullwidth" outlined><i
+                        class="fab fa-windows" style="color: #85f369;"></i> {{answer.a0504}}
+                </b-button>
+                <b-button @click="rr05()" v-if="situation=='q06'" type="is-info is-fullwidth" outlined>{{answer.a0601}}
+                </b-button>
+                <b-button @click="pr06()" v-if="situation=='q06'" type="is-info is-fullwidth" outlined>{{answer.a0602}}
+                </b-button>
+                <b-button @click="pr07()" v-if="situation=='q07'" type="is-info is-fullwidth" outlined>{{answer.a0701}}
+                </b-button>
+                <b-button @click="pr08()" v-if="situation=='q07'" type="is-info is-fullwidth" outlined>{{answer.a0702}}
+                </b-button>
+                <b-button @click="rr06()" v-if="situation=='q08'" type="is-info is-fullwidth" outlined>{{answer.a0801}}
+                </b-button>
+                <b-button @click="rr02()" v-if="situation=='q08'" type="is-info is-fullwidth" outlined>{{answer.a0802}}
+                </b-button>
+                <b-button @click="rr02()" v-if="situation=='q08'" type="is-info is-fullwidth" outlined>{{answer.a0803}}
+                </b-button>
+                <b-button @click="rr05()" v-if="situation=='q09'" type="is-info is-fullwidth" outlined>{{answer.a0901}}
+                </b-button>
+                <b-button @click="pr09()" v-if="situation=='q09'" type="is-info is-fullwidth" outlined>{{answer.a0902}}
+                </b-button>
+                <b-button @click="pr09()" v-if="situation=='q09'" type="is-info is-fullwidth" outlined>{{answer.a0903}}
+                </b-button>
+                <b-button @click="rr01()" v-if="situation=='q10'" type="is-info is-fullwidth" outlined>{{answer.a1001}}
+                </b-button>
+                <b-button @click="rr07()" v-if="situation=='q10'" type="is-info is-fullwidth" outlined>{{answer.a1002}}
+                </b-button>
+                <b-button @click="rr08()" v-if="situation=='q10'" type="is-info is-fullwidth" outlined>{{answer.a1003}}
+                </b-button>
+                <b-button @click="rr09()" v-if="situation=='q11'" type="is-info is-fullwidth" outlined>{{answer.a1101}}
+                </b-button>
+                <b-button @click="rr02()" v-if="situation=='q11'" type="is-info is-fullwidth" outlined>{{answer.a1102}}
+                </b-button>
+                <b-button @click="pr12()" v-if="situation=='q12'" type="is-info is-fullwidth" outlined>{{answer.a1201}}
+                </b-button>
+                <b-button @click="pr14()" v-if="situation=='q12'" type="is-info is-fullwidth" outlined>{{answer.a1202}}
+                </b-button>
+                <b-button @click="rr04()" v-if="situation=='q13'" type="is-info is-fullwidth" outlined>{{answer.a1301}}
+                </b-button>
+                <b-button @click="pr10()" v-if="situation=='q13'" type="is-info is-fullwidth" outlined>{{answer.a1302}}
+                </b-button>
+                <b-button @click="pr07()" v-if="situation=='q13'" type="is-info is-fullwidth" outlined>{{answer.a1303}}
+                </b-button>
+                <b-button @click="pr13()" v-if="situation=='q13'" type="is-info is-fullwidth" outlined>{{answer.a1304}}
+                </b-button>
+                <b-button @click="rr05()" v-if="situation=='q14'" type="is-info is-fullwidth" outlined>{{answer.a1401}}
+                </b-button>
+                <b-button @click="pr08()" v-if="situation=='q14'" type="is-info is-fullwidth" outlined>{{answer.a1402}}
+                </b-button>
+                <b-button @click="rr01()" v-if="situation=='q15'" type="is-info is-fullwidth" outlined>{{answer.a1501}}
+                </b-button>
+                <b-button @click="rr01()" v-if="situation=='q15'" type="is-info is-fullwidth" outlined>{{answer.a1502}}
+                </b-button>
+                <b-button @click="pr15()" v-if="situation=='q15'" type="is-info is-fullwidth" outlined>{{answer.a1503}}
+                </b-button>
+                <b-button @click="rr04()" v-if="situation=='q15'" type="is-info is-fullwidth" outlined>{{answer.a1504}}
+                </b-button>
+                <b-button @click="rr02()" v-if="situation=='q16'" type="is-info is-fullwidth" outlined>{{answer.a1601}}
+                </b-button>
+                <b-button @click="rr03()" v-if="situation=='q16'" type="is-info is-fullwidth" outlined>{{answer.a1601}}
+                </b-button>
+
+            </div>
+
+        </section>
+
+        <section v-if="resulted">
+            <div class="tile">
+                <div class="tile is-parent is-3 nopad">
+                    <article class="tile is-child notification is-light is-bold">
+                        <div class="content">
+                            <p class="title justified">{{myLang}}</p>
+                            <div class="justified">
+                                <figure class="image is-128x128">
+                                    <img v-bind:src="langPic">
+                                </figure>
+                            </div>
+                            <div class="justified">
+                                <p class="subtitle justified">{{texts.youShould1 + myLang + texts.youShould2 }}</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="tile is-parent is-3">
+                    <article class="tile is-child notification is-light" style="padding: 5px">
+                        <div class="content">
+                            <p class="title justified">{{myHero}}</p>
+                            <div class="is-parent is-vertical">
+                                <div class="is-child justified">
+                                    <figure class="image">
+                                        <img class="is-rounded" v-bind:src="heroPic">
+                                    </figure>
+                                </div>
+
+                                <div class="notification is-default is-child justified">
+                                    <p class="ems" v-html="myQuote"></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+                </div>
+
+                <div class="tile is-parent is-6 nopad">
+                    <article class="tile is-child notification is-light" style="padding: 5px">
+                        <div class="content">
+
+                            <div class="is-parent is-vertical">
+
+
+                                <div class="notification is-default is-child justified">
+                                    <ul>
+                                        <li v-for="item in myList" v-html="item.text">
+
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="notification is-default is-child justified">
+                                    <p v-html="texts.popularity" style="margin:0px"></p>
+                                    <span v-for="index in 10" class="fa fa-star"
+                                        :class="{checked: stars >= index}"></span>
+                                </div>
+
+                                <div class="notification is-default is-child justified" style="border: 2px white solid">
+                                    <p style="margin:0px" v-html="texts.avsalary"></p>
+                                    <p v-html="salary"></p>
+                                </div>
+
+                                <div class="notification is-default is-child justified"
+                                    style="padding: 0px; margin: 0px;">
+                                    <span style="margin:0px" v-html="texts.used"></span>
+
+                                </div>
+
+                                <div class="notification is-default is-child justified">
+
+                                    <span v-html="used"></span>
+                                </div>
+
+                                <div class="notification is-default is-child justified" style="padding-right: 20px;">
+                                    <button @click="letsStart" class="button is-medium is-warning is-fullwidth"
+                                        style="padding: 5px;">
+                                        {{texts.again}}
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <footer class="footer bott" :class="{bott2: resulted}" style="padding: 10px">
+            <div class="content has-text-centered">
+                <p v-html="texts.footerText"></p>
+            </div>
+        </footer>
+    </div>
+
+
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

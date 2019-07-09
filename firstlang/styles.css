@@ -1,0 +1,54 @@
+
+html,body{
+    height: 100%;
+  }
+  body{
+    margin: 0;
+  }
+
+.justified {
+    text-align: justify;
+    text-justify: inter-word;
+    justify-content: center;
+    align-items:center;
+    display: flex;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
+.bott {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;  
+}
+.bott2{
+    position: fixed;
+}
+
+.nopad {
+    padding-left: 0px !important; 
+    padding-right: 0px !important;
+}
+
+.ems {
+    font-style: italic;
+}
+
+.primar {
+    background-color: hsla(71, 100%, 41%, 0.185) !important
+}
+.checked {
+  color: orange;
+}
+
+@media only screen and (max-width: 768px) {
+  .bott2 {position: relative;
+    }
+}
